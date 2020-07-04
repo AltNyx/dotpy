@@ -40,5 +40,6 @@ try:
     # To start coding in vsc
     os.system('code .')
 
-except:
-    print("Repo already exists...")
+except Exception as e:
+    print("Repo already exists or usernname of password do not match...")
+    print(e)
