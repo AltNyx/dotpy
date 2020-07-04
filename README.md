@@ -1,4 +1,6 @@
-# create-repo-automatically
+# create-repo-automatically  
+
+### Works only for WINDOWS  
 
 ## How to use
 1.Download create.exe  
@@ -27,11 +29,14 @@ That's it!!
 
 ## Screenshots
 
-![](images/create_exe.png)
-create.exe in Desktop (You can put it anywhere you want)  
+![](images/create_exe.png)  
+#### create.exe in Desktop (You can put it anywhere you want)  
 
-![](images/path.png)
-folder created in path  
+![](images/path.png)  
+#### folder created in path  
 
-![](images/repo_folder.png)
-inside repo folder  
+![](images/repo_folder.png)  
+#### inside repo folder  
+
+![](images/vsc.png)  
+#### Visual studio code opens and you can start coding immidiately
