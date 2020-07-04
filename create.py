@@ -18,7 +18,7 @@ loc = path + name
 
 try:
     repo = user.create_repo(name)
-    commands = [f'echo "# {repo.name}" >> README.md',
+    commands = [f'echo # {repo.name} >> README.md',
                 'git init',
                 'git add README.md',
                 'git commit -m "first commit"',
