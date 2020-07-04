@@ -22,7 +22,7 @@
 
 ![](images/cmd.png)  
 
-1.Open cmd where create.exe is located
+1.Open cmd where create.exe is located  
 2.Type "create your_repo_name"
 
 That's it!!
@@ -30,13 +30,13 @@ That's it!!
 ## Screenshots
 
 ![](images/create_exe.png)  
-#### create.exe in Desktop (You can put it anywhere you want)  
+#### -File create.exe in Desktop (You can put it anywhere you want)  
 
 ![](images/path.png)  
-#### folder created in path  
+#### -Folder created in path  
 
 ![](images/repo_folder.png)  
-#### inside repo folder  
+#### -Inside repo folder  
 
 ![](images/vsc.png)  
-#### Visual studio code opens and you can start coding immidiately
+#### -Visual studio code opens and you can start coding immidiately
