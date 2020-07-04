@@ -3,7 +3,7 @@
 ### Works only for WINDOWS  
 
 ## How to use
-1.Download create.exe  
+1.Download create.exe (https://github.com/piyx/create-repo-automatically/raw/master/create.exe)  
 2.Set environment variables  
 3.Open cmd prompt in the location where create.exe was downloaded  
 4.Type "create github_repo_name" in cmd  
