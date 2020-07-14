@@ -4,7 +4,7 @@ import os
 import sys
 from github import Github
 
-path = os.getenv("FILEPATH")
+path = os.getenv("FILEPATH") + '\\'
 username = os.getenv("USER")
 password = os.getenv("PASS")
 
