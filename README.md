@@ -2,6 +2,11 @@
 
 Download songs/audio from youtube videos effortlessly.
 
+## Note
+
+> The yt.py file is in cli folder.  
+> Gui application for yt downloader is still incomplete.
+
 ## Usage
 
 `python yt.py "youtube_song_url"`
