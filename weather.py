@@ -1,41 +1,83 @@
-import json
 import requests
+from datetime import date
+import sys
 import os
-from datetime import datetime
+
+API_KEY = os.getenv("WEATHER_API")
 
 
-def forecast(data):
-    if 'message' in data:
-        print(data['message'])
-        return
-
-    KELVIN = 273.15
-    DEGREE = "\u00B0"
-    weather = data['weather'][0]['description']
-    temp = data['main']['temp'] - KELVIN
-    feels_like = data['main']['feels_like'] - KELVIN
-    sunrise = datetime.fromtimestamp(data['sys']['sunrise']).time()
-    sunset = datetime.fromtimestamp(data['sys']['sunset']).time()
-
-    print()
-    print(f'Weather: {weather}')
-    print(f'Temp: {temp:.2f}{DEGREE}C')
-    print(f'Feels Like: {feels_like:.2f}{DEGREE}C')
-    print(f'Sunrise: {sunrise}')
-    print(f'Sunset: {sunset}')
-
-
-def main():
-    # Enter your api key
-    API_KEY = os.getenv("WEATHER")
-
-    city = input("Enter city: ")
-    url = f'http://api.openweathermap.org/data/2.5/weather?appid={API_KEY}&q={city}'
-
+def current_weather(city):
+    url = f"http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}"
     response = requests.get(url)
     data = response.json()
-    forecast(data)
+
+    if "error" in data:
+        return None
+
+    res = {}
+
+    # Location details
+    location = data['location']
+    city, state, country = location['name'], location['region'], location['country']
+
+    res['Location'] = {'City': city, 'State': state, 'Country': country}
+
+    # Weather
+    condition = data['current']['condition']
+    desc, icon = condition['text'], "https:" + condition['icon']
+
+    res['Weather'] = {'Description': desc, 'Icon': icon}
+
+    # Numbers
+    degree = u"\N{DEGREE SIGN}"
+
+    temp = data['current']
+    current = f"{temp['temp_c']}{degree}C"
+    wind = f"{temp['wind_kph']} kmph"
+    pressure = f"{temp['pressure_mb']} mbar"
+    feels_like = f"{temp['feelslike_c']}{degree}C"
+
+    res['Numbers'] = {'Current': current,
+                      'Feels Like': feels_like, 'Wind Speed': wind, 'Pressure': pressure}
+
+    return res
 
 
-if __name__ == "__main__":
-    main()
+def astronomy(city):
+    today = date.today()
+    url = f"https://api.weatherapi.com/v1/astronomy.json?key={API_KEY}&q={city}&dt={today}"
+    response = requests.get(url)
+    data = response.json()
+
+    if "error" in data:
+        return None
+
+    # Astronomy
+    astro = data['astronomy']['astro']
+    sunrise, sunset, moonrise, moonset = astro['sunrise'], astro['sunset'], astro['moonrise'], astro['moonset']
+    res = {'Sunrise': sunrise, 'Sunset': sunset,
+           'Moonrise': moonrise, 'Moonset': moonset}
+    return res
+
+
+city = sys.argv[1]
+weather = current_weather(city)
+astro = astronomy(city)
+
+
+if not weather or not astro:
+    print("Invalid city!")
+    sys.exit()
+
+for head, sub in weather.items():
+    if isinstance(sub, dict):
+        print(f"{head}\n")
+        for name, value in sub.items():
+            print(f"{name}: {value}")
+        print()
+    else:
+        print(f"{head}: {sub}")
+
+print("Astro\n")
+for name, value in astro.items():
+    print(f"{name}: {value}")
