@@ -21,7 +21,7 @@ Get weather asap.
 > ### Weather
 >
 > Description: Partly cloudy  
-> Icon: https://cdn.weatherapi.com/weather/64x64/day/116. png
+> Icon: https://cdn.weatherapi.com/weather/64x64/day/116.png
 
 > ### Numbers
 >
