@@ -17,7 +17,7 @@ Download songs/audio from youtube videos effortlessly.
 
 ## Output
 
-> Video Details:
+> Video Details:  
 > Title - [WRLD - Hang Up (feat. Savoi) [Monstercat Release]]  
 > Views - 934447  
 > Duration - 00:03:20  
