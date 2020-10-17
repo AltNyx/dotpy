@@ -11,12 +11,11 @@ Get covid 19 notifications on number of cases worldwide, in country and state.
 
 ## Output
 
-> WorldWide
+### WorldWide
 ![](img/ww.png)
 
 ### India
 ![](img/ind.png)
 
-> Karnataka
-
+### Karnataka
 ![](img/ka.png)
