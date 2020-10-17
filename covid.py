@@ -24,7 +24,7 @@ class Covid:
     def get_data(self, rows):
         for row in rows:
             loc = row.find(attrs={'class': "pcAJd"})
-            confirmed, _, cpm, recovered, deaths = row.find_all(
+            confirmed, _, recovered, cpm, deaths = row.find_all(
                 'td', attrs={'class': "l3HOY"})
 
             data = Data(loc.string, confirmed.string, cpm.string,
@@ -34,7 +34,7 @@ class Covid:
     def display_notification(self):
         toast = ToastNotifier()
         for val in self.values:
-            note = f"Location: {val.location}\nConfirmed: {val.confirmed}\nRecovered: {val.recovered}\nDeaths: {val.deaths}\n"
+            note = f"Location: {val.location}\nConfirmed: {val.confirmed}\nCases Per Million: {val.case_per_mil}\nDeaths: {val.deaths}\n"
             toast.show_toast("Covid 19 Overview", note, duration=10)
 
 
