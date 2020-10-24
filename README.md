@@ -17,7 +17,7 @@ optional arguments:
 ```
 
 ## How to get the token?
-```Visit https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token```
+Visit https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
 
 
 ## Example
