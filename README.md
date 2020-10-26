@@ -5,10 +5,10 @@ Monitor wifi speed
 `pip install speedtest-cli`
 
 ## Usage
-1. Run `python test.py`
-Let it run for a while (Each test takes 20 sec)
+1. Run `python test.py`  
+Let it run for a while
 
-2. Run `python graph.py`
+2. Run `python graph.py`  
 Outputs a graph as an image
 
 ## Example
