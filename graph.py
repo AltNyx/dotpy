@@ -14,7 +14,7 @@ with open('monitor.csv', 'r') as csvfile:
 
 plt.figure()
 plt.plot(time, download, label='download', color='r')
-plt.plot(time, upload, label='download', color='b')
+plt.plot(time, upload, label='upload', color='b')
 plt.title('Internet Speed')
 plt.xticks(rotation=360-45)
 plt.xlabel('time')
