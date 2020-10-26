@@ -18,3 +18,4 @@ with open('monitor.csv', 'w', newline='') as csvfile:
         upspeed = round(s.upload()/1024**2, 2)
         writer.writerow(
             {'time': time_, 'downspeed': downspeed, 'upspeed': upspeed})
+        time.sleep(60)
