@@ -6,10 +6,11 @@ Monitor wifi speed
 
 ## Usage
 1. Run `python test.py`  
-Let it run for a while
+It creates monitor.csv file and adds all readings to it  
+Let it run for a while  
 
-2. Run `python graph.py`  
-Outputs a graph as an image
+2. Run `python graph.py`    
+Outputs a graph as an image  
 
 ## Example
 ![](speed.jpg)
