@@ -3,7 +3,7 @@ Create repo directly from command line
 
 
 
-## Usage
+## Create repo
 `Note: This will create repo in the same folder from where its run.`  
 `python create.py <repo_name> [-private]`
 
@@ -29,3 +29,10 @@ Visit https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-g
 
 ## Result
 ![](imgs/op.png)
+
+
+## Download All repos
+`python download.py`
+
+## Result
+![](imgs/dwld.png)
