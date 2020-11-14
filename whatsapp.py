@@ -18,7 +18,6 @@ class Whatsapp:
         '''
         Check if a phone number is valid or not.
         '''
-
         try:
             ph = phonenumbers.parse(phone_no)
             if not phonenumbers.is_valid_number(ph):
