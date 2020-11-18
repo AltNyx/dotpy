@@ -70,7 +70,7 @@ class Whatsapp:
 
 
 if __name__ == "__main__":
-    number = '+917259179578'
+    number = 'phone_no'
     msg = 'happy birthday'
     Whatsapp.send_quick_message(number, msg)
     Whatsapp.send_scheduled_message(number, 10, 22, msg)
