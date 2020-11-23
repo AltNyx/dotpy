@@ -1,6 +1,6 @@
 # whatsapp.py
 
-Send timed whatsapp messages.
+Send scheduled whatsapp messages.
 
 ## Usage
 
