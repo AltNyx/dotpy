@@ -8,14 +8,16 @@ import os
 
 
 class Youtube:
-    quality = {'1080p60': 299, '1080p': 137, '720p60': 298, '720p': 136, '480p': 135, '360p': 134}
+    quality = {'1080p60': 299, '1080p': 137, '720p60': 298,
+               '720p': 136, '480p': 135, '360p': 134}
+
     def __init__(self, vid_name: str):
         '''
         Parameters:
             vid_name: name of the youtube video
         '''
         self.vid_name = vid_name
-    
+
     @property
     def vid_url(self) -> str:
         '''Get youtube video url from video name'''
@@ -28,10 +30,10 @@ class Youtube:
                 return f"https://www.youtube.com/watch?v={video_ids[0]}"
         except Exception as e:
             print(e)
-    
+
     def video_details(self, video: 'pafy object') -> None:
         '''Prints the video details
-        
+
         Parameters:
             video: pafy video object
         '''
@@ -40,15 +42,14 @@ class Youtube:
         print(f"Views - {video.viewcount}")
         print(f"Duration - {video.duration}")
         print("Downloading...")
-    
+
     def download_audio(self, url: str, path: str) -> None:
         '''Downloads the best audio from the given youtube video url'''
-        print(path)
         video = pafy.new(url)
         self.video_details(video)
         bestaudio = video.getbestaudio(preftype="m4a")
         bestaudio.download(path)
-    
+
     def download_video(self, url: str, path: str) -> None:
         '''downloads the video from the given youtube video url'''
         for quality, itag in Youtube.quality.items():
@@ -56,9 +57,9 @@ class Youtube:
             if status != 0:
                 print(f'Could not find {quality} video. Trying lower')
                 continue
-                
+
             return
-        
+
         print(f"Coudn't find a decent quality for {url}")
 
 
@@ -69,22 +70,22 @@ def main():
     )
 
     parser.add_argument(
-        'vid_name', 
-        type=str, 
+        'vid_name',
+        type=str,
         help='name of the youtube video.'
     )
 
     parser.add_argument(
-        '--audio', 
-        type=bool, 
-        default=False, 
+        '--audio',
+        type=bool,
+        default=False,
         help='Set audio to True to download only audio default: False'
     )
 
     parser.add_argument(
-        '--path', 
-        type=str, 
-        default=os.getcwd(), 
+        '--path',
+        type=str,
+        default=os.getcwd(),
         help='Path where file has to be downloaded, default: current directory'
     )
 
