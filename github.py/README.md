@@ -35,4 +35,4 @@ Visit https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-g
 `python download.py`
 
 ## Result
-![](imgs/dwld.png)
+<img src="imgs/dwld.png" alt="dwld" width="100%"/>
