@@ -1,5 +1,5 @@
 # create_repo
-Create repo directly from command line
+Create repo directly from command line and clone all repositories with a single command.
 
 
 
