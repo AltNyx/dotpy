@@ -12,8 +12,8 @@ class AnimeInfo:
     rating: str     = 'Unkwown'
     duration: str   = 'Unknown'
     aired: str      = 'Unknown'
-    thumnail: str   = 'Unknown'
-    download: dict  = field(default_factory=dict)
+    thumbnail: str  = 'Unknown'
+    download: str   = 'Unknown'
 
 
 def get_anime_info(query: str) -> Optional[AnimeInfo]:
@@ -21,25 +21,26 @@ def get_anime_info(query: str) -> Optional[AnimeInfo]:
 
     Examples:
     
-    >>> get_anime_info('Naruto')
+    >>> get_anime_info('Naruto') 
     AnimeInfo(title='Naruto Shippuden (Season 1-21 + Naruto + Movies + OVAs) 1080p Dual Audio HEVC', 
               genres='Action, Adventure, Comedy, Super Power, Martial Arts, Shounen', 
               episodes='(Seasons 1-21 + Movies + OVAs)', 
               rating='PG-13 – Teens 13 or older', 
               duration='23 min. per ep.', 
               aired='Unknown', 
-              thumnail='https://kayoanime.com/wp-content/uploads/2021/03/shippud-season-1-21-movies-ovas-1080p-dual-audio-hevc-390x220.jpg', 
-              download={'OVA Collections': 'https://drive.google.com/drive/folders/1qswTqH9qFAt8Gs_u-TBJnxlSCrKRVFVX?usp=sharing'}
+              thumbnail='a-very-long-url', 
+              download='long-url'
             )
-    
-    >>> get_anime_info('Handa Kun') 
+
+    >>> get_anime_info('Handa kun') 
     AnimeInfo(title='Handa-Kun (Season 1) 1080p Dual Audio HEVC', 
-              genres='Slice of Life, Comedy, Shounen', episodes='12', 
+              genres='Slice of Life, Comedy, Shounen', 
+              episodes='12', 
               rating='PG-13 – Teens 13 or older', 
               duration='24 min. per ep.', 
               aired='Jul 8, 2016 to Sep 23, 2016', 
-              thumnail='https://kayoanime.com/wp-content/uploads/2021/01/handa-kun-season-1-1080p-dual-audio-hevc-390x220.jpg', 
-              download={'1080p': 'https://tinyurl.com/y3bx4wtl'}
+              thumbnail='a-very-long-url', 
+              download='long-url'
             )
     '''
     url = f"https://kayoanime.com/?s={query}"
@@ -60,7 +61,8 @@ def get_anime_info(query: str) -> Optional[AnimeInfo]:
     anime_info = AnimeInfo()
 
     anime_info.title = title
-    anime_info.thumnail = imgurl
+    anime_info.download = link
+    anime_info.thumbnail = imgurl
 
 
     # Get more details
@@ -71,22 +73,12 @@ def get_anime_info(query: str) -> Optional[AnimeInfo]:
     if not post:
         return None
 
-    dwld_div = []
     info_div = []
 
     for div in post.select('div.toggle.tie-sc-open'):
         head = div.select_one('h3.toggle-head').text
         if head.startswith("Information"):
             info_div = div
-        
-        elif head.startswith("Download"):
-            dwld_div = div
-    
-    link_tags = dwld_div.select('div.toggle-content > a') if dwld_div else []
-    for tag in link_tags:
-        download_link = tag.get('href')
-        name = tag.text
-        anime_info.download[name] = download_link
     
     items = info_div.select('div.toggle-content > ul > li') if info_div else []
     for item in items:
