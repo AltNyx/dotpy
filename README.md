@@ -33,5 +33,5 @@ AnimeInfo(title='Handa-Kun (Season 1) 1080p Dual Audio HEVC',
 
 ## Anime BOT
 
-![](media/ss_naruto.jpg)
-![](media/ss_aot.jpg)
+<img src='media/ss_naruto.jpg' width=49.5%>
+<img src='media/ss_aot.jpg' width=49.5%>
