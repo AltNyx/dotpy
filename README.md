@@ -1,4 +1,4 @@
-# animeAPI
+# AnimeAPI
 
 A very simple API to get basic useful information about anime including download links
 
