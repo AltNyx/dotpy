@@ -11,14 +11,14 @@ from weather import apod
 
 
 >>> current_weather('New york')
-    Weather(loc='New York, New York',
-            desc='Overcast',
-            icon='https://cdn.weatherapi.com/weather/64x64/day/122.png',
-            curr='6.7°C',
-            wind='0.0 kmph',
-            pressure='1009.0 mbar',
-            feels='3.6°C'
-           )
+Weather(loc='New York, New York',
+        desc='Overcast',
+        icon='https://cdn.weatherapi.com/weather/64x64/day/122.png',
+        curr='6.7°C',
+        wind='0.0 kmph',
+        pressure='1009.0 mbar',
+        feels='3.6°C'
+       )
 
 
 >>> astronomy('New york')
