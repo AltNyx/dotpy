@@ -4,35 +4,31 @@ Get weather asap.
 
 ## Usage
 
-`python weather.py city_name`
+```python
+from weather import current_weather
+from weather import astronomy
+from weather import apod
 
-## Example
 
-`python weather.py bengaluru`
+>>> current_weather('New york')
+    Weather(loc='New York, New York',
+            desc='Overcast',
+            icon='https://cdn.weatherapi.com/weather/64x64/day/122.png',
+            curr='6.7°C',
+            wind='0.0 kmph',
+            pressure='1009.0 mbar',
+            feels='3.6°C'
+           )
 
-## Output
 
-> ### Location
->
-> City: Bengaluru  
-> State: Karnataka  
-> Country: India
+>>> astronomy('New york')
+Astro(sunrise='06:14 AM',
+      sunset='07:38 PM',
+      moonrise='09:27 AM',
+      moonset='12:11 AM'
+    )
 
-> ### Weather
->
-> Description: Partly cloudy  
-> Icon: https://cdn.weatherapi.com/weather/64x64/day/116.png
 
-> ### Numbers
->
-> Current: 26.0°C  
-> Feels Like: 27.0°C  
-> Wind Speed: 0.0 kmph  
-> Pressure: 1015.0 mbar
-
-> ### Astro
->
-> Sunrise: 06:09 AM  
-> Sunset: 06:04 PM  
-> Moonrise: 11:41 PM  
-> Moonset: 12:03 PM
+>>> apod()
+'https://apod.nasa.gov/apod/image/2104/FlamenebulaIR1024.jpg'
+```
