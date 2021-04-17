@@ -1,83 +1,111 @@
 import requests
 from datetime import date
-import sys
-import os
-
-API_KEY = os.getenv("WEATHER_API")
+from typing import Optional
+from dataclasses import dataclass
 
 
-def current_weather(city):
-    url = f"http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}"
-    response = requests.get(url)
+BASE = "http://api.weatherapi.com"
+WEATHER_API = 'YOUR-WEATHER-API-KEY'
+# Get key from https://www.weatherapi.com/
+
+
+@dataclass
+class Weather:
+    loc: str
+    desc: str
+    icon: str
+    curr: str
+    wind: str
+    pressure: str
+    feels: str
+
+
+@dataclass
+class Astro:
+    sunrise: str
+    sunset: str
+    moonrise: str
+    moonset: str
+
+
+def current_weather(city: str) -> Optional[Weather]:
+    ''' Get the current weather of any city
+
+    Example:
+
+    >>> current_weather('New york') 
+    Weather(loc='New York, New York', 
+            desc='Overcast', 
+            icon='https://cdn.weatherapi.com/weather/64x64/day/122.png', 
+            curr='6.7°C', 
+            wind='0.0 kmph', 
+            pressure='1009.0 mbar', 
+            feels='3.6°C'
+           )
+    '''
+    weather_url = BASE + f"/v1/current.json?key={WEATHER_API}&q={city}"
+    response = requests.get(weather_url)
     data = response.json()
 
     if "error" in data:
         return None
 
-    res = {}
-
-    # Location details
     location = data['location']
-    city, state, country = location['name'], location['region'], location['country']
-
-    res['Location'] = {'City': city, 'State': state, 'Country': country}
-
-    # Weather
     condition = data['current']['condition']
-    desc, icon = condition['text'], "https:" + condition['icon']
-
-    res['Weather'] = {'Description': desc, 'Icon': icon}
-
-    # Numbers
     degree = u"\N{DEGREE SIGN}"
-
     temp = data['current']
-    current = f"{temp['temp_c']}{degree}C"
-    wind = f"{temp['wind_kph']} kmph"
-    pressure = f"{temp['pressure_mb']} mbar"
-    feels_like = f"{temp['feelslike_c']}{degree}C"
 
-    res['Numbers'] = {'Current': current,
-                      'Feels Like': feels_like, 'Wind Speed': wind, 'Pressure': pressure}
+    return Weather(
+        loc=f"{location['name']}, {location['region']}",
+        desc=condition['text'],
+        icon=f"https:{condition['icon']}",
+        curr=f"{temp['temp_c']}{degree}C",
+        wind=f"{temp['wind_kph']} kmph",
+        pressure=f"{temp['pressure_mb']} mbar",
+        feels=f"{temp['feelslike_c']}{degree}C"
+    )
 
-    return res
 
+def astronomy(city: str) -> Optional[Astro]:
+    ''' Get the astro details of any city
 
-def astronomy(city):
+    Example:
+
+    >>> astronomy('New york')
+    Astro(sunrise='06:14 AM', 
+          sunset='07:38 PM',
+          moonrise='09:27 AM', 
+          moonset='12:11 AM'
+         )
+    '''
     today = date.today()
-    url = f"https://api.weatherapi.com/v1/astronomy.json?key={API_KEY}&q={city}&dt={today}"
+    url = BASE + f"/v1/astronomy.json?key={WEATHER_API}&q={city}&dt={today}"
     response = requests.get(url)
     data = response.json()
 
     if "error" in data:
         return None
 
-    # Astronomy
     astro = data['astronomy']['astro']
-    sunrise, sunset, moonrise, moonset = astro['sunrise'], astro['sunset'], astro['moonrise'], astro['moonset']
-    res = {'Sunrise': sunrise, 'Sunset': sunset,
-           'Moonrise': moonrise, 'Moonset': moonset}
-    return res
+
+    return Astro(
+        sunrise=astro['sunrise'],
+        sunset=astro['sunset'],
+        moonrise=astro['moonrise'],
+        moonset=astro['moonset']
+    )
 
 
-city = sys.argv[1]
-weather = current_weather(city)
-astro = astronomy(city)
+def apod() -> Optional[str]:
+    '''Returns a url of the astronomy picture of the day
 
+    Example:
 
-if not weather or not astro:
-    print("Invalid city!")
-    sys.exit()
-
-for head, sub in weather.items():
-    if isinstance(sub, dict):
-        print(f"{head}\n")
-        for name, value in sub.items():
-            print(f"{name}: {value}")
-        print()
-    else:
-        print(f"{head}: {sub}")
-
-print("Astro\n")
-for name, value in astro.items():
-    print(f"{name}: {value}")
+    >>> apod()
+    'https://apod.nasa.gov/apod/image/2104/FlamenebulaIR1024.jpg'
+    '''
+    NASA_API = 'YOUR-NASA-API-KEY'
+    # Get key from https://api.nasa.gov/
+    url = f"https://api.nasa.gov/planetary/apod?api_key={NASA_API}"
+    response = requests.get(url)
+    return response.json()['url'] if response.ok else None
